@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'universityInformation.spiders'
 #USER_AGENT = 'universityInformation (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -96,4 +96,23 @@ REDIS_URL = 'redis://:foobared@127.0.0.1:6379'
 # 设置redis持久化
 SCHEDULER_PERSIST = True
 # 配置重爬取
-# SCHEDULER_FLUSH_ON_START = True
+SCHEDULER_FLUSH_ON_START = True
+# 针对某一个域名的爬取线程数设置
+CONCURRENT_REQUESTS_PER_DOMAIN = 2
+# 设置全局并发，100一般是一个比较合适的数值
+CONCURRENT_REQUESTS = 32
+# 增加Twisted IO线程池的最大量
+REACTOR_THREADPOOL_MAXSIZE = 20
+# 降低log等级
+LOG_LEVEL = 'INFO'
+# 禁用 cookies
+COOKIES_ENABLED = False
+# 禁用重试
+RETRY_ENABLED = False
+# 降低下载超时
+DOWNLOAD_TIMEOUT = 15
+# 禁止重定向
+REDIRECT_ENABLED = False
+# 启用爬取 “Ajax 页面爬取”
+AJAXCRAWL_ENABLED = True
+
