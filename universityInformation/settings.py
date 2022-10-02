@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'universityInformation.spiders'
 #USER_AGENT = 'universityInformation (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -86,3 +86,14 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# 配置调度器为redis
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# 配置去重类为redis
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# 配置需要连接的redis
+REDIS_URL = 'redis://:foobared@127.0.0.1:6379'
+# 设置redis持久化
+SCHEDULER_PERSIST = True
+# 配置重爬取
+# SCHEDULER_FLUSH_ON_START = True
