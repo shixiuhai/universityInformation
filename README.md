@@ -1,0 +1,2 @@
+# universityInformation
+一个通过通用爬取获取信息的爬虫项目
