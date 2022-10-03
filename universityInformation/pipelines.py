@@ -97,6 +97,10 @@ class MysqlPipeline():
         # data = dict(item)
         
         if self.clean_data(item):
+            data=dict(item)
+            print(data.keys())
+            print(data.values())
+
             # print('----------')
             # print(item['contentTitle'])
             # print(item["visitLink"])
@@ -107,10 +111,11 @@ class MysqlPipeline():
             #     print("错误是 "+self.get_domain(item["visitLink"]))
             # 给schoolName赋值
             item['schoolName']=get_university_information("schoolDomainName")[self.get_domain(item["visitLink"])]
+            # print(type(item))
             # print(item['schoolName'])
             # print('----------')
-            # sql = 'insert into %s (%s,%s,%s,%s,%s,%s) values (%s,%s,%s,%s,%s,%s)' % (item.table, keys, values)
-            # self.cursor.execute(sql, tuple(data.values()))
-            # self.db.commit()
+            sql = "insert into %s ('school_name','visit_link','page_soure','content_title','content_publishTime','content') values ('%s','%s','%s','%s','%s','%s')" % (item.table,item["schoolName"],item["visitLink"],item["pageSoure"],item["contentTitle"],item["contentPublishTime"],item["content"])
+            self.cursor.execute(sql)
+            self.db.commit()
         return item
 

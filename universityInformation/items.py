@@ -9,7 +9,7 @@ import scrapy
 class UniversityinformationItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    table="university_information"
+    table="university_info"
     # 学校名称
     schoolName=scrapy.Field()
     # 访问链接
