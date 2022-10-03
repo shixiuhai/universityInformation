@@ -116,7 +116,7 @@ class MysqlPipeline():
             # 给schoolName赋值
             item['schoolName']=get_university_information("schoolDomainName")[self.get_domain(item["visitLink"])]
             # print(type(item))
-            print(item['contentPublishTime'])
+            # print(item['contentPublishTime'])
             # print('----------')
             try:
                 sql = "insert into %s (school_name,visit_link,page_soure,content_title,content_publishTime,content) values ('%s','%s','%s','%s','%s','%s')" % (item.table,item["schoolName"],item["visitLink"],escape_string(item["pageSoure"]),item["contentTitle"],item["contentPublishTime"],escape_string(item["content"]))

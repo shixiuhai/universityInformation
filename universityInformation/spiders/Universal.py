@@ -50,8 +50,6 @@ class UniversalSpider(scrapy.Spider):
         for link in allLink:
             cont=cont+1
             # 通过scrapy引擎对每个链接发起请求
-            yield scrapy.Request(link, callback=self.parse)
-            print('-----')
         print("爬取的总页面是%s"%cont)
 
     
