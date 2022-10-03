@@ -99,6 +99,9 @@ SCHEDULER_PERSIST = True
 SCHEDULER_FLUSH_ON_START = True
 # 针对某一个域名的爬取线程数设置
 CONCURRENT_REQUESTS_PER_DOMAIN = 2
+# 针对某一个ip的爬取线程数量设置
+CONCURRENT_REQUESTS_PER_IP=2
+
 # 设置全局并发，100一般是一个比较合适的数值
 CONCURRENT_REQUESTS = 32
 # 增加Twisted IO线程池的最大量
@@ -115,4 +118,21 @@ DOWNLOAD_TIMEOUT = 15
 REDIRECT_ENABLED = False
 # 启用爬取 “Ajax 页面爬取”
 AJAXCRAWL_ENABLED = True
-
+# 爬虫中间键
+# SPIDER_MIDDLEWARES = {
+#    'universityInformation.middlewares.UniversityinformationSpiderMiddleware': 543,
+# }
+# 下载中间键
+DOWNLOADER_MIDDLEWARES = {
+   'universityInformation.middlewares.UniversityinformationDownloaderMiddleware': 543,
+}
+# pipeline存储设置
+ITEM_PIPELINES = {
+   'universityInformation.pipelines.MysqlPipeline': 300,
+}
+# 设置mysql相关
+MYSQL_HOST = 'localhost'
+MYSQL_DATABASE = 'images360'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = '123456'
+MYSQL_PORT = 3306
