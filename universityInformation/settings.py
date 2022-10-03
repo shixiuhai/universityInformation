@@ -7,17 +7,11 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'universityInformation'
-
-SPIDER_MODULES = ['universityInformation.spiders']
-NEWSPIDER_MODULE = 'universityInformation.spiders'
-
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'universityInformation (+http://www.yourdomain.com)'
 
-# Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -86,6 +80,20 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+# 爬虫基础设置
+BOT_NAME = 'universityInformation'
+
+SPIDER_MODULES = ['universityInformation.spiders']
+NEWSPIDER_MODULE = 'universityInformation.spiders'
+
+# 是否遵循robots.txt的规则 
+# Obey robots.txt rules
+ROBOTSTXT_OBEY = True
+
+# 配置请求头
+DEFAULT_REQUEST_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+}
 
 # 配置调度器为redis
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
@@ -95,7 +103,7 @@ DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 REDIS_URL = 'redis://:foobared@127.0.0.1:6379'
 # 设置redis持久化
 SCHEDULER_PERSIST = True
-# 配置重爬取
+# 配置重爬取，分布式其中一台主机设置即可
 SCHEDULER_FLUSH_ON_START = True
 # 针对某一个域名的爬取线程数设置
 CONCURRENT_REQUESTS_PER_DOMAIN = 2
@@ -103,9 +111,9 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 2
 CONCURRENT_REQUESTS_PER_IP=2
 
 # 设置全局并发，100一般是一个比较合适的数值
-CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 100
 # 增加Twisted IO线程池的最大量
-REACTOR_THREADPOOL_MAXSIZE = 20
+REACTOR_THREADPOOL_MAXSIZE = 30
 # 降低log等级
 LOG_LEVEL = 'INFO'
 # 禁用 cookies
@@ -118,13 +126,13 @@ RETRY_ENABLED = True
 #重试次数 
 RETRY_TIMES = 2
 #超时  
-DOWNLOAD_TIMEOUT = 3  
+DOWNLOAD_TIMEOUT = 3
 #重试代码
 RETRY_HTTP_CODES = [500, 502, 503, 504, 408]
 
 # 降低下载超时
 DOWNLOAD_TIMEOUT = 15
-# 禁止重定向
+# 重定向
 REDIRECT_ENABLED = True
 # 启用爬取 “Ajax 页面爬取”
 AJAXCRAWL_ENABLED = True
@@ -149,3 +157,4 @@ MYSQL_PASSWORD = 'sxh.200008'
 MYSQL_PORT = 3306
 # 设置代理池地址
 PROXY_URL="http://127.0.0.1:5010/get/"
+# 设置mongoDB相关

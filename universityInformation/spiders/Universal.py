@@ -17,8 +17,8 @@ class UniversalSpider(scrapy.Spider):
     domainList=get_university_information("schoolDomainName")
     for domain in domainList:
         allowed_domains.append(domain)
-        if 'www' in domain:
-            start_urls.append("http://"+domain)
+        # 添加到url里 所有的domain都添加上http，为了子域名考虑
+        start_urls.append("http://"+domain)
     print(allowed_domains,start_urls)
 
     # scrapy 默认调用的提取函数
@@ -50,6 +50,7 @@ class UniversalSpider(scrapy.Spider):
         for link in allLink:
             cont=cont+1
             # 通过scrapy引擎对每个链接发起请求
+            yield scrapy.Request(link, callback=self.parse)
         print("爬取的总页面是%s"%cont)
 
     

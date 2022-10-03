@@ -78,8 +78,8 @@ class MysqlPipeline():
     
     # 定义一个是否满足插入条件的函数进行数据简单清洗
     def clean_data(slef,item:dict)->bool:
-        if item["contentPublishTime"]=='':
-            item["contentPublishTime"]='2000-01-01'
+        # if item["contentPublishTime"]=='':
+        #     item["contentPublishTime"]='2000-01-01'
             
         if item['contentTitle'] !='':
             return True
