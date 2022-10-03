@@ -111,7 +111,17 @@ LOG_LEVEL = 'INFO'
 # 禁用 cookies
 COOKIES_ENABLED = False
 # 禁用重试
-RETRY_ENABLED = False
+# RETRY_ENABLED = False
+
+#打开重试开关
+RETRY_ENABLED = True 
+#重试次数 
+RETRY_TIMES = 2
+#超时  
+DOWNLOAD_TIMEOUT = 3  
+#重试代码
+RETRY_HTTP_CODES = [500, 502, 503, 504, 408]
+
 # 降低下载超时
 DOWNLOAD_TIMEOUT = 15
 # 禁止重定向
@@ -137,3 +147,5 @@ MYSQL_DATABASE = 'business_school'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = 'sxh.200008'
 MYSQL_PORT = 3306
+# 设置代理池地址
+PROXY_URL="http://127.0.0.1:5010/get/"

@@ -14,23 +14,25 @@ class ProxyMiddleware():
         self.logger = logging.getLogger(__name__)
         self.proxy_url = proxy_url
     
+    # 重写random方法
     def get_random_proxy(self):
         try:
             response = requests.get(self.proxy_url)
             if response.status_code == 200:
-                proxy = response.text
+                # 重写获取代理ip
+                proxy = response.json()['proxy']
                 return proxy
         except requests.ConnectionError:
             return False
-    
+    # request 前会调用该函数
     def process_request(self, request, spider):
-        if request.meta.get('retry_times'):
-            proxy = self.get_random_proxy()
-            if proxy:
-                uri = 'https://{proxy}'.format(proxy=proxy)
-                self.logger.debug('使用代理 ' + proxy)
-                request.meta['proxy'] = uri
-
+        # if request.meta.get('retry_times'):
+        proxy = self.get_random_proxy()
+        if proxy:
+            uri = 'https://{proxy}'.format(proxy=proxy)
+            self.logger.debug('使用代理 ' + proxy)
+            request.meta['proxy'] = uri
+    # 获取spider setting配置
     @classmethod
     def from_crawler(cls, crawler):
         settings = crawler.settings
