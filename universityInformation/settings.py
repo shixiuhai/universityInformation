@@ -115,7 +115,7 @@ RETRY_ENABLED = False
 # 降低下载超时
 DOWNLOAD_TIMEOUT = 15
 # 禁止重定向
-REDIRECT_ENABLED = False
+REDIRECT_ENABLED = True
 # 启用爬取 “Ajax 页面爬取”
 AJAXCRAWL_ENABLED = True
 # 爬虫中间键
@@ -125,6 +125,7 @@ AJAXCRAWL_ENABLED = True
 # 下载中间键
 DOWNLOADER_MIDDLEWARES = {
    'universityInformation.middlewares.UniversityinformationDownloaderMiddleware': 543,
+   'universityInformation.middlewares.ProxyMiddleware': 555
 }
 # pipeline存储设置
 ITEM_PIPELINES = {
