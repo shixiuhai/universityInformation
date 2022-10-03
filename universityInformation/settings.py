@@ -132,7 +132,7 @@ ITEM_PIPELINES = {
 }
 # 设置mysql相关
 MYSQL_HOST = 'localhost'
-MYSQL_DATABASE = 'images360'
+MYSQL_DATABASE = 'business_school'
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = '123456'
+MYSQL_PASSWORD = 'sxh.200008'
 MYSQL_PORT = 3306

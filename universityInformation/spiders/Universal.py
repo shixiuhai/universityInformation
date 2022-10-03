@@ -41,7 +41,8 @@ class UniversalSpider(scrapy.Spider):
         yield item
         # 提取所有可以访问的链接
         # 提取selector对象里字符串
-        allLink=response.xpath('//li//a/@href')
+        # allLink=response.xpath('//li//a/@href')
+        allLink=response.xpath('//a/@href')
         # 对可访问的链接进行处理
         allLink=self.parse_link(self.get_httpDomain(response.url),allLink.extract())
         # 遍历网页中获取的所有链接

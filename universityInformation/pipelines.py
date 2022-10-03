@@ -8,6 +8,7 @@ from universityInformation.utils import get_university_information
 import pymongo
 import pymysql
 import tldextract
+from pymysql.converters import escape_string
 
 
 
@@ -62,13 +63,13 @@ class MysqlPipeline():
         )
     
     def open_spider(self, spider):
-        # self.db = pymysql.connect(self.host, self.user, self.password, self.database, charset='utf8',
-        #                           port=self.port)
-        # self.cursor = self.db.cursor()
+        self.db = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database, charset='utf8',
+                                  port=self.port)
+        self.cursor = self.db.cursor()
         pass
     
     def close_spider(self, spider):
-        # self.db.close()
+        self.db.close()
         pass
     
     # 定义一个获取主域名的函数
@@ -77,6 +78,9 @@ class MysqlPipeline():
     
     # 定义一个是否满足插入条件的函数进行数据简单清洗
     def clean_data(slef,item:dict)->bool:
+        if item["contentPublishTime"]=='':
+            item["contentPublishTime"]='2000-01-01'
+            
         if item['contentTitle'] !='':
             return True
     
@@ -97,9 +101,9 @@ class MysqlPipeline():
         # data = dict(item)
         
         if self.clean_data(item):
-            data=dict(item)
-            print(data.keys())
-            print(data.values())
+            # data=dict(item)
+            # print(data.keys())
+            # print(data.values())
 
             # print('----------')
             # print(item['contentTitle'])
@@ -112,10 +116,14 @@ class MysqlPipeline():
             # 给schoolName赋值
             item['schoolName']=get_university_information("schoolDomainName")[self.get_domain(item["visitLink"])]
             # print(type(item))
-            # print(item['schoolName'])
+            print(item['contentPublishTime'])
             # print('----------')
-            sql = "insert into %s ('school_name','visit_link','page_soure','content_title','content_publishTime','content') values ('%s','%s','%s','%s','%s','%s')" % (item.table,item["schoolName"],item["visitLink"],item["pageSoure"],item["contentTitle"],item["contentPublishTime"],item["content"])
-            self.cursor.execute(sql)
-            self.db.commit()
+            try:
+                sql = "insert into %s (school_name,visit_link,page_soure,content_title,content_publishTime,content) values ('%s','%s','%s','%s','%s','%s')" % (item.table,item["schoolName"],item["visitLink"],escape_string(item["pageSoure"]),item["contentTitle"],item["contentPublishTime"],escape_string(item["content"]))
+                # print(sql)
+                self.cursor.execute(sql)
+                self.db.commit()
+            except Exception as error:
+                print(error)
         return item
 
