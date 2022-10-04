@@ -4,21 +4,20 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 import requests
 from scrapy import signals
-import logging
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
 # 设置代理池使用
 class ProxyMiddleware():
     def __init__(self, proxy_url):
-        self.logger = logging.getLogger(__name__)
+        # self.logger = logging.getLogger(__name__)
         self.proxy_url = proxy_url
     
     # 重写random方法
     def get_random_proxy(self):
         try:
             response = requests.get(self.proxy_url)
-            if response.status_code == 200:
+            if response.status_code == 200 and response.json()["https"]=="true":
                 # 重写获取代理ip
                 proxy = response.json()['proxy']
                 return proxy
@@ -30,7 +29,10 @@ class ProxyMiddleware():
             proxy = self.get_random_proxy()
             if proxy:
                 uri = 'https://{proxy}'.format(proxy=proxy)
-                self.logger.debug('使用代理 ' + proxy)
+                print('------------------')
+                print("使用代理 "+proxy)
+                print('------------------')
+                # self.logger.debug('使用代理 ' + proxy)
                 request.meta['proxy'] = uri
     # 获取spider setting配置
     @classmethod
