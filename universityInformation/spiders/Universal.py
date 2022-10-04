@@ -67,10 +67,15 @@ class UniversalSpider(scrapy.Spider):
         for link in linkList:
             if 'http' in link:
                 outList.append(link)
-            elif '' in link:
+            elif '' in link or '.png' in link or '.jpg' in link or 'js' in link:
                 pass
             else:
                 outList.append(self.get_httpDomain(url)+'/'+link)
+                print("拼接的链接是---------")
+                print(self.get_httpDomain(url)+'/'+link)
+                print("拼接的链接是---------")
+
+                
         return outList
             
 
