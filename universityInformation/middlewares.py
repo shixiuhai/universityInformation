@@ -5,8 +5,6 @@
 import requests
 from scrapy import signals
 # useful for handling different item types with a single interface
-from itemadapter import is_item, ItemAdapter
-
 # 设置代理池使用
 class ProxyMiddleware():
     def __init__(self, proxy_url):

@@ -88,12 +88,12 @@ NEWSPIDER_MODULE = 'universityInformation.spiders'
 
 # 是否遵循robots.txt的规则 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # 配置请求头
-DEFAULT_REQUEST_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
-}
+# DEFAULT_REQUEST_HEADERS = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
+# }
 
 # 配置调度器为redis
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
@@ -104,7 +104,7 @@ REDIS_URL = 'redis://:foobared@127.0.0.1:6379'
 # 设置redis持久化
 SCHEDULER_PERSIST = True
 # 配置重爬取，分布式其中一台主机设置即可
-SCHEDULER_FLUSH_ON_START = False
+SCHEDULER_FLUSH_ON_START = True
 # 针对某一个域名的爬取线程数设置
 CONCURRENT_REQUESTS_PER_DOMAIN = 2
 # 针对某一个ip的爬取线程数量设置
@@ -143,7 +143,10 @@ AJAXCRAWL_ENABLED = True
 # 下载中间键
 DOWNLOADER_MIDDLEWARES = {
    'universityInformation.middlewares.UniversityinformationDownloaderMiddleware': 543,
-   'universityInformation.middlewares.ProxyMiddleware': 555
+   'universityInformation.middlewares.ProxyMiddleware': 555,
+   'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400 # 开启
+
+   
 }
 # pipeline存储设置
 ITEM_PIPELINES = {
