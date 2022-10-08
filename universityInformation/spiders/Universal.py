@@ -48,7 +48,7 @@ class UniversalSpider(scrapy.Spider):
         # 对可访问的链接进行处理
         allLink=self.parse_link(response.url,allLink.extract())
         # 遍历网页中获取的所有链接
-        print("提取的新页面链接是%s"%len(allLink))
+        print("提取的新页面链接个数是%s"%len(allLink))
         for link in allLink:
             cont=cont+1
             # 通过scrapy引擎对每个链接发起请求
@@ -97,7 +97,7 @@ class UniversalSpider(scrapy.Spider):
                 print(self.get_httpDomain(url)+'/'+link)
                 print("拼接的链接是---------")
 
-        print(outList)   
+        # print(outList)   
         return outList
             
 
