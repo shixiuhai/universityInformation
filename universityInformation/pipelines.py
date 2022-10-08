@@ -10,9 +10,6 @@ import pymysql
 import tldextract
 from pymysql.converters import escape_string
 
-
-
-
 # class UniversityinformationPipeline:
 #     def process_item(self, item, spider):
 #         return item

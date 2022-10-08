@@ -21,6 +21,7 @@ class ProxyMiddleware():
                 return proxy
         except requests.ConnectionError:
             return False
+    
     # request 前会调用该函数
     def process_request(self, request, spider):
         if request.meta.get('retry_times'):
@@ -99,7 +100,6 @@ class UniversityinformationDownloaderMiddleware:
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
-
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
         # middleware.
