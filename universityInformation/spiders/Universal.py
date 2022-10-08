@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 # 导入学校信息
 from universityInformation.utils import get_university_information
 # 导入实体类
-cont=0
+count=0
 from universityInformation.items import UniversityinformationItem
 class UniversalSpider(scrapy.Spider):
     name = 'Universal'
@@ -50,7 +50,7 @@ class UniversalSpider(scrapy.Spider):
         # 遍历网页中获取的所有链接
         print("提取的新页面链接个数是%s"%len(allLink))
         for link in allLink:
-            cont=cont+1
+            count=count+1
             # 通过scrapy引擎对每个链接发起请求
             yield scrapy.Request(link, callback=self.parse)
         print("爬取的总页面是%s"%cont)

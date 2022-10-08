@@ -104,7 +104,7 @@ REDIS_URL = 'redis://:foobared@127.0.0.1:6379'
 # 设置redis持久化
 SCHEDULER_PERSIST = True
 # 配置重爬取，分布式其中一台主机设置即可
-SCHEDULER_FLUSH_ON_START = True
+SCHEDULER_FLUSH_ON_START = False
 # 针对某一个域名的爬取线程数设置
 CONCURRENT_REQUESTS_PER_DOMAIN = 2
 # 针对某一个ip的爬取线程数量设置
