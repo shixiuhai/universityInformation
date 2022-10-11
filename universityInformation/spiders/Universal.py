@@ -22,7 +22,7 @@ class UniversalSpider(scrapy.Spider):
 
     # scrapy 默认调用的提取函数
     def parse(self, response):
-        global cont
+        global count
         # 实例化实体类对象
         item=UniversityinformationItem()
         # 获取访问链接
@@ -53,7 +53,7 @@ class UniversalSpider(scrapy.Spider):
             count=count+1
             # 通过scrapy引擎对每个链接发起请求
             yield scrapy.Request(link, callback=self.parse)
-        print("爬取的总页面是%s"%cont)
+        print("爬取的总页面是%s"%count)
 
     
     # 定义一个提取网页标题，发布时间，正文内容的函数
